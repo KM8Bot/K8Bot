@@ -11,7 +11,7 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 
 
 client.on('ready', () => {
-    console.log(client.user.username + ' Is now online!');
+    console.log(client.user.username + ' Is now online!'); // log to console that the bot is online
 });
 
 
@@ -29,14 +29,34 @@ client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return; // ignore messages that dont start with our prefix
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+	const command = args.shift().toLowerCase(); //shift command to all lowercase
 
     if (command === 'online') // if a user uses the online command
     {
         client.commands.get('online').execute(message, args); //grab the code from online.js in commands folder and execute it
     }
+    if (command ==='version') // if a user uses the version command
+    {
+        client.commands.get('version').execute(message, args); //execute the version.js command under commands folder
+    }
 
 
 
+
+
+
+
+
+
+    //issue finding & executing the command
+    if (!client.commands.has(command)) return;
+
+    try {
+        client.commands.get(command).execute(message, args);
+    } catch (error) {
+        console.error(error); // send the error to console
+        message.reply('Error trying to execute that command!'); // tell the user there was an error using that command
+    }
 }
 );
+client.login(token); //login
