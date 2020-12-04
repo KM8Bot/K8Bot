@@ -28,7 +28,6 @@ for (const file of commandFiles) {
 client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return; // ignore messages that dont start with our prefix
 
-	const args = message.content.slice(prefix.length).split(/ +/);
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
