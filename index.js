@@ -18,7 +18,7 @@ client.on('ready', () => {
 
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const command = require(`./commands/${file}`); // command requires our commands file
 	client.commands.set(command.name, command);
 }
 
@@ -49,11 +49,11 @@ client.on('message', async message => {
 
 
     //issue finding & executing the command
-    if (!client.commands.has(command)) return;
+    if (!client.commands.has(command)) return; //if the command folder does not have the command do the following
 
     try {
-        client.commands.get(command).execute(message, args);
-    } catch (error) {
+        client.commands.get(command).execute(message, args); //try to take the command from the command folder and execute it
+    } catch (error) { //catch the error
         console.error(error); // send the error to console
         message.reply('Error trying to execute that command!'); // tell the user there was an error using that command
     }
