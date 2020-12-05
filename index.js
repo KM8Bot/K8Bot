@@ -39,7 +39,10 @@ client.on('message', async message => {
     {
         client.commands.get('version').execute(message, args); //execute the version.js command under commands folder
     }
-
+    if (command === 'kick') // if the command is kick
+    {
+        client.commands.get('kick').execute(message, args); // grab the code from kick.js and execute it.
+    }
 
 
 
